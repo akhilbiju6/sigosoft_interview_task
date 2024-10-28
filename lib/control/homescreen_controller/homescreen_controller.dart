@@ -9,6 +9,8 @@ class ProductController extends ChangeNotifier {
   List<String> imageList = [];
   List<String> priceList = [];
   List<String> categoryList=[];
+  List<String> categoryImageList=[];
+
 
   Future<void> fetchBackendData() async {
     try {
@@ -29,6 +31,7 @@ class ProductController extends ChangeNotifier {
         imageList.clear();
         priceList.clear();
         categoryList.clear();
+        categoryImageList.clear();
 
         ProductResponse userModel = ProductResponse.fromJson(responseData);
         productList.add(userModel);
@@ -36,15 +39,18 @@ class ProductController extends ChangeNotifier {
         imageList.add(userModel.data?.product?.image ?? "");
         priceList.add(userModel.data?.product?.price ?? "");
        
+       
 
 
         for (var relatedProduct in userModel.data?.related ?? []) {
            categoryList.add(relatedProduct.type?? "");
+           categoryImageList.add(relatedProduct.cuttingImage?? "");
         }
 
         print(nameList); // Log the list of product names
         print(imageList); // Log the list of product images
-        print(priceList); // Log the list of product prices
+        print(priceList);
+        print(categoryList); // Log the list of product prices
       } else {
         print("Failed to fetch product details. Status Code: ${response.statusCode}");
       }

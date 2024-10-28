@@ -43,6 +43,8 @@ class _HomeScreenState extends State<HomeScreen> {
             List imageList = productController.imageList;
             List priceList = productController.priceList;
             List nameList = productController.nameList;
+            List categoryList = productController.categoryList;
+            List categoryImageList = productController.categoryImageList;
 
             if (productList.isNotEmpty) {
               return Column(
@@ -87,13 +89,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: 250,
                     child: GridView.builder(
                       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4),
-                      itemCount: productList.length, // Use imageList length
+                      itemCount: categoryList.length, // Use imageList length
                       physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
                         return GridViewWidget(
-                          imageUrl: imageList[index], // Populate with dynamic data
-                          name: nameList[index], // Use the name list
+                          imageUrl: categoryImageList[index], // Populate with dynamic data
+                          name: categoryList[index], // Use the name list
                         );
                       },
                     ),
