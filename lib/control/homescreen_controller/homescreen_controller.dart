@@ -10,6 +10,10 @@ class ProductController extends ChangeNotifier {
   List<String> priceList = [];
   List<String> categoryList=[];
   List<String> categoryImageList=[];
+  List<String> todayList=[];
+  List<String> netquantityList=[];
+  List<String> mrpList=[];
+  List<String> offerPriceList=[];
 
 
   Future<void> fetchBackendData() async {
@@ -32,7 +36,10 @@ class ProductController extends ChangeNotifier {
         priceList.clear();
         categoryList.clear();
         categoryImageList.clear();
-
+        todayList.clear();
+        netquantityList.clear();
+        mrpList.clear();
+        offerPriceList.clear();
         ProductResponse userModel = ProductResponse.fromJson(responseData);
         productList.add(userModel);
          nameList.add(userModel.data?.product?.name ?? "");
@@ -45,6 +52,11 @@ class ProductController extends ChangeNotifier {
         for (var relatedProduct in userModel.data?.related ?? []) {
            categoryList.add(relatedProduct.type?? "");
            categoryImageList.add(relatedProduct.cuttingImage?? "");
+           todayList.add(relatedProduct.productName?? "");
+           netquantityList.add(relatedProduct.netWeight?? "");
+           mrpList.add(relatedProduct.originalPrice?? "");
+           offerPriceList.add(relatedProduct.offerPrice?? "");
+           
         }
 
         print(nameList); // Log the list of product names
